@@ -44,7 +44,7 @@ const Register = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: FormData) => {
     console.log(data);
   };
 
@@ -59,7 +59,7 @@ const Register = () => {
               <TextInput
                 placeholder="Name (optional)"
                 placeholderTextColor={COLORS.placeholder}
-                style={styles.input}
+                style={styles.inputField}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -77,7 +77,7 @@ const Register = () => {
               <TextInput
                 placeholder="Email"
                 placeholderTextColor={COLORS.placeholder}
-                style={styles.input}
+                style={styles.inputField}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
@@ -97,7 +97,7 @@ const Register = () => {
               <TextInput
                 placeholder="Password"
                 placeholderTextColor={COLORS.placeholder}
-                style={styles.input}
+                style={styles.inputField}
                 onChangeText={onChange}
                 value={value}
                 secureTextEntry
@@ -121,7 +121,7 @@ const Register = () => {
 
       {loading && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color={COLORS.primary} />
+          <ActivityIndicator color="#fff" size="large" />
         </View>
       )}
     </View>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginVertical: 8,
   },
-  input: {
+  inputField: {
     padding: 12,
     borderRadius: 4,
     borderWidth: 1,

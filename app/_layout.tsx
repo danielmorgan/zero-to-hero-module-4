@@ -26,6 +26,13 @@ export default function RootLayout() {
           title: "Create Account",
         }}
       />
+      <Stack.Screen
+        name="privacy"
+        options={{
+          presentation: "modal",
+          title: "Privacy Policy",
+        }}
+      />
     </Stack>
   );
 }
