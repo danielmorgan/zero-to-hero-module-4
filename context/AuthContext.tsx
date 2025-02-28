@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { loginUser, registerUser } from "@/utils/api";
 
-const JWT_KEY = "fj3028g4h2091";
+const JWT_KEY = "jwt-key";
 
 type AuthProps = {
-  token: string;
-  userId: number;
+  token: string | null;
+  userId: number | null;
   onRegister: (email: string, password: string, name?: string) => Promise<any>;
   onLogin: (email: string, password: string) => Promise<any>;
   onLogout: () => Promise<void>;
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loadToken = async () => {
       const storedToken = await SecureStore.getItemAsync(JWT_KEY);
       if (storedToken) {
-        console.log("loaded stored token", storedToken);
+        console.log("Load Stored Token:", storedToken);
         processToken(storedToken);
       }
       setInitialized(true);
