@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -12,6 +13,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
+import { useAuth } from "@/context/AuthContext";
 import { COLORS } from "@/utils/colors";
 
 const schema = z.object({
@@ -28,6 +30,7 @@ type FormData = z.infer<typeof schema>;
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { onRegister } = useAuth();
 
   const {
     control,
@@ -37,15 +40,22 @@ const Register = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+      name: "Test User",
+      email: `test${Math.random().toString(36).substring(2, 6)}@example.com`,
+      password: "secret",
     },
     mode: "onChange",
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    setLoading(true);
+    const result = await onRegister!(data.email, data.password, data.name);
+    if (result && result.error) {
+      Alert.alert("Error", result.msg);
+    } else {
+      router.back();
+    }
+    setLoading(false);
   };
 
   return (

@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   StyleSheet,
   Text,
@@ -13,6 +14,7 @@ import { Image } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
+import { useAuth } from "@/context/AuthContext";
 import { COLORS } from "@/utils/colors";
 
 const schema = z.object({
@@ -24,6 +26,7 @@ type FormData = z.infer<typeof schema>;
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { onLogin } = useAuth();
 
   const {
     control,
@@ -32,14 +35,19 @@ const Login = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "test@example.com",
+      password: "secret",
     },
     mode: "onChange",
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    setLoading(true);
+    const result = await onLogin!(data.email, data.password);
+    if (result && result.error) {
+      Alert.alert("Error", result.msg);
+    }
+    setLoading(false);
   };
 
   return (

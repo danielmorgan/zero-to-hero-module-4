@@ -1,12 +1,7 @@
 import * as FileSystem from "expo-file-system";
-import { Platform } from "react-native";
 import axios from "axios";
 
 let API_URL = `${process.env.EXPO_PUBLIC_API_URL}/api`;
-
-if (Platform.OS === "android") {
-  API_URL = "http://10.0.2.2:3000/api";
-}
 
 export interface ApiResponse<T> {
   data?: T;
