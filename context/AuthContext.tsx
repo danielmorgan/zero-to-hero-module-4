@@ -1,5 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { loginUser, registerUser } from "@/utils/api";
 
@@ -47,6 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log("Decoded Token:", decodedToken);
       setToken(token);
       setUserId(decodedToken.id);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } catch (error) {
       console.error("Error decoding token:", error);
       handleLogout();
@@ -75,6 +77,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setToken(null);
     setUserId(null);
     await SecureStore.deleteItemAsync(JWT_KEY);
+    axios.defaults.headers.common["Authorization"] = null;
   };
 
   const value = {
