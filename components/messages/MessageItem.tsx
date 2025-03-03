@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import { formatDistanceToNow } from "date-fns";
 import { Message } from "@/utils/api";
 
@@ -8,11 +8,31 @@ type Props = {
 };
 
 export const MessageItem = ({ message }: Props) => {
+  const colorScheme = useColorScheme();
+
   return (
-    <Link href={`/messages/${message.id}`} style={[styles.container]} asChild>
+    <Link
+      href={`/messages/${message.id}`}
+      style={[
+        styles.container,
+        {
+          backgroundColor: colorScheme === "dark" ? "#111" : "#fff",
+          borderColor: colorScheme === "dark" ? "#333" : "#eee",
+        },
+      ]}
+      asChild
+    >
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.content}>
-          <Text style={styles.text} numberOfLines={3}>
+          <Text
+            style={[
+              styles.text,
+              {
+                color: colorScheme === "dark" ? "#fff" : "#000",
+              },
+            ]}
+            numberOfLines={3}
+          >
             {message.content}
           </Text>
           <Text style={styles.date}>
