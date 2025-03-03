@@ -3,8 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { COLORS } from "@/utils/colors";
 
-type Props = {};
-const FAB = (props: Props) => {
+export const FAB = () => {
   return (
     <Link href="/new-message" asChild>
       <TouchableOpacity style={styles.fab}>
@@ -13,7 +12,7 @@ const FAB = (props: Props) => {
     </Link>
   );
 };
-export default FAB;
+
 const styles = StyleSheet.create({
   fab: {
     position: "absolute",
