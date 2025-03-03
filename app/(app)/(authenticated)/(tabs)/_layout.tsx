@@ -16,13 +16,15 @@ const Layout = () => {
         headerStyle: {
           backgroundColor: COLORS.background,
         },
+        headerTitleStyle: {
+          fontFamily: "LuckiestGuy_400Regular",
+        },
         headerTintColor: "#fff",
       }}
     >
       <Tabs.Screen
         name="messages"
         options={{
-          title: "Messages",
           headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <FontAwesome6 name="message" size={size} color={color} />

@@ -119,8 +119,6 @@ const Message = () => {
       <Stack.Screen options={{ title: `Message #${id}` }} />
 
       <View style={styles.container}>
-        {/* <IconButton icon="arrow-back" onPress={() => router.back()} /> */}
-
         {isOwner ? (
           <View style={[styles.ownMessageContainer]}>
             {isEditing ? (

@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
     color: "#fff",
+    fontFamily: "LuckiestGuy_400Regular",
   },
   subheader: {
     fontSize: 18,

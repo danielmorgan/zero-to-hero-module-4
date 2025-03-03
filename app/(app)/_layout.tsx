@@ -27,6 +27,9 @@ export default function RootLayout() {
         headerStyle: {
           backgroundColor: COLORS.background,
         },
+        headerTitleStyle: {
+          fontFamily: "LuckiestGuy_400Regular",
+        },
         headerTintColor: "#fff",
         contentStyle: {
           backgroundColor: COLORS.backgroundDark,

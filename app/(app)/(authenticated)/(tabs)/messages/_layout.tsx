@@ -5,9 +5,11 @@ const Layout = () => {
   return (
     <Stack
       screenOptions={{
-        // headerShown: false,
         headerStyle: { backgroundColor: COLORS.background },
         headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontFamily: "LuckiestGuy_400Regular",
+        },
       }}
     >
       <Stack.Screen name="index" options={{ headerTitle: "Messages" }} />
